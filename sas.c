@@ -1,6 +1,5 @@
 #include <stdio.h>
-#include<stdbool.h>
-#include <string.h>
+ #include <string.h>
      typedef struct
 {
      char titre[100];
@@ -14,10 +13,10 @@
      void ajouter()  {
 
      printf(" le titre : ");
-     scanf(" %[^\n]",A[c].titre);
+     scanf(" %[^\n]s",A[c].titre);
 
      printf(" la descriptin : ");
-     scanf(" %[^\n]",A[c].description);
+     scanf(" %[^\n]s",A[c].description);
 
      printf(" la date d echeance  (YYYY-MM-DD) : ");
      scanf(" %s",A[c].datedecheance);
@@ -51,7 +50,7 @@
     scanf("%d",&M);
 
     if(M >0 && M <= c){
-        
+        M--;
         printf("Nouveau Titre :");
         scanf("%s",A[M].titre);
         printf(" Nouvelle Description :");
@@ -67,6 +66,40 @@
         printf(" invalide index !");
     }
 }
+
+     void supprimer(){
+    int s;             //S:POUR STOCKER LE N° DE LA TACHE A SPRM
+    printf("Entrez le numéro de la tache a supprimer (1 à %d): ", c);
+    scanf("%d", &s);
+    if (s < 1 || s > c) {
+    printf("Tache invalide.\n");
+    return;
+    }
+    for (int i = s; i < c - 1; i++) {
+    A[i] = A[i + 1];}
+    c--;
+    printf("Tache supprimer avec succes.\n");
+}
+
+    void Filtrer()  {
+     char priorite[100];
+     char f;
+
+     printf("Entrez la priorite a filtrer (High/Low) : ");
+     scanf("%s",priorite);
+
+     for(int i=0; i<c ; i++){
+            if(strcmp( A[i].priorite,priorite)==0){     //  STRCMP=COMPARER ENTRER DEUX CHAIN DE CARACTERE
+                     printf("\n tache %d :\n", i + 1);  // NUMERO DE LA TACHE QUI Afficher
+                     printf("-titre: %s\n", A[i].titre);
+                     printf("-description: %s\n", A[i].description);
+                     printf("-datedecheance: %s\n", A[i].datedecheance);
+                     printf("-priorite: %s\n", A[i].priorite);
+
+            }
+}}
+
+
 
      int main()
 {    int choix;
@@ -103,9 +136,9 @@
      break;
      case 5:
      printf("Vous avez choisi de Filtrer les Taches .\n");
-     Filtrer();
+     Filtrer(); 
      break;
 }
 }
-     while(choix!=6);     
+     while(choix!=6);     // ! : TOKHALIF
 }
